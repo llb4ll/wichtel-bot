@@ -13,3 +13,4 @@ A small wichtel bot to send out secret santa emails.
 ## Technologies
 - Golang: https://golang.org/
 - Docker: https://www.docker.com/
+
