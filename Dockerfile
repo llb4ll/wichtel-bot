@@ -1,10 +1,10 @@
 FROM golang:1.9
 
-WORKDIR /go/src/app
+WORKDIR /go/src/wichtel
 COPY . .
 
 RUN go-wrapper download
 RUN go-wrapper install
-RUN go test .
+RUN go test -v .
 
-CMD ["go-wrapper", "run"]
+CMD ["go-wrapper", "run", "-v"]
