@@ -16,20 +16,33 @@ type Wichtel struct {
 
 type WichtelGroup []Wichtel
 
+type WichtelMap map[*Wichtel]Wichtel
+
+
 // Main function running the wichtel draw
 func main() {
 	fmt.Println("Hello wichtel admin!")
 
+	var wichtelGroup WichtelGroup;
+
+	wichtelGroup.readWichtelInput("wichtel.json")
+
+	fmt.Println("You are about to draw wichtel from: ", wichtelGroup)
+
+	var wichtelMap WichtelMap;
+
+	wichtelMap.assignWichtel(wichtelGroup)
+
 }
 
 // Draw a random wichtel from the wichtel pool
-func (wichtelOut WichtelGroup) drawRandomWichtel(wichtelIn WichtelGroup) {
+func (wichtel Wichtel) drawRandomWichtel(wichtelIn WichtelGroup) {
 
 }
 
 // Send out wichtel emails
-func sendEmail() {
-
+func (wichtel Wichtel) sendEmail() {
+	// send out wichtel mail
 }
 
 func (wichtelGroup *WichtelGroup) readWichtelInput(filePath string) {
@@ -39,11 +52,15 @@ func (wichtelGroup *WichtelGroup) readWichtelInput(filePath string) {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("File contents: %s", content)
-
 	jsonErr := json.Unmarshal(content, wichtelGroup)
 
 	if jsonErr != nil {
 		log.Fatal("Wichtel unmarshal failed: ", jsonErr)
+	}
+}
+
+func (wichtelMap *WichtelMap) assignWichtel(wichtelGroup WichtelGroup) {
+	for index, wichtel := range wichtelGroup {
+		(*wichtelMap)[&(wichtelGroup[index])] = wichtel
 	}
 }
