@@ -15,3 +15,11 @@ A small wichtel bot to send out secret santa emails.
 - Golang: https://golang.org/
 - Docker: https://www.docker.com/
 
+## Build & Run
+The easiest way to get started is to use Docker to build and run the project:
+
+To build the project with docker:
+`docker build -t "wichtel-bot" .`
+
+To run the wichtel bot:
+`docker run wichtel:latest`
