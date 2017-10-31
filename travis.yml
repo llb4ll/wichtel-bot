@@ -1,4 +1,9 @@
+sudo: required
+
 language: go
 
-go:
-  - master
+services:
+  - docker
+
+script:
+  - docker build -t llb4ll/wichtel-bot .
