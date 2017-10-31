@@ -8,6 +8,7 @@ A small wichtel bot to send out secret santa emails.
 - You can dry-run and run the wichtel bot using Docker
 - Configure smtp settings in a config file
 - Provide secret santa email addresses using a config file
+- Define exclusions for each secret santa (this person will not be in the draw). Perfect to prevent couples from gifting each other.
 - Chirstmas style the email you sent out
 
 ## Technologies
