@@ -2,10 +2,11 @@ package main
 
 import "fmt"
 
-// A wichtel for the wichtel draw
+// A wichtel for the wichtel draw - wichtel are identified by their email
 type Wichtel struct {
 	Name  string
 	Email string
+	ExcludeWichtel []Wichtel
 }
 
 // Main function running the wichtel draw

@@ -3,7 +3,7 @@ A small wichtel bot to send out secret santa emails.
 
 [![Build Status](https://travis-ci.org/llb4ll/wichtel-bot.svg?branch=master)](https://travis-ci.org/llb4ll/wichtel-bot)
 
-## Features
+## Features (to be implemented)
 - Add email addresses and the wichtel bot will randomly draw secret santas and send them emails containing the name and email of their wichtel
 - You can dry-run and run the wichtel bot using Docker
 - Configure smtp settings in a config file
@@ -23,3 +23,8 @@ To build the project with docker:
 
 To run the wichtel bot:
 `docker run wichtel:latest`
+
+## Algorithm
+The first implementation will be a greedy shuffle that is performed for each secret santa. 
+In case a secret santa is left without a matching wichtel the draw is repeated.
+The maximum amount of tries is set to 10.

@@ -5,7 +5,7 @@ import "testing"
 func TestWichtel(t *testing.T) {
 
 	// construct new wichtel
-	wichtel1 := Wichtel{"Test Wichtel", "testmail@test.de"}
+	wichtel1 := Wichtel{"Test Wichtel", "testmail@test.de", []Wichtel{}}
 
 	wichtelName := wichtel1.Name
 	if(wichtelName) != "Test Wichtel"{
