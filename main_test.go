@@ -1,4 +1,8 @@
-package main
+package wichtel
 
-func main() {
+import "testing"
+
+func TestMain(t *testing.T) {
+
+	Wichtel()
 }

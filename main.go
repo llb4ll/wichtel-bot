@@ -1,4 +1,4 @@
-package main
+package wichtel
 
-func main() {
+func Wichtel() {
 }
