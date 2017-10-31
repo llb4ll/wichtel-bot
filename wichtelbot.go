@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"encoding/json"
+	"io/ioutil"
+	"log"
 )
 
 // A wichtel for the wichtel draw - wichtel are identified by their email
@@ -30,16 +32,18 @@ func sendEmail() {
 
 }
 
-func (wichtelGroup *WichtelGroup) readWichtelInput() {
+func (wichtelGroup *WichtelGroup) readWichtelInput(filePath string) {
 
-	jsonInput := []byte(`[{
-		  "Name": "Test Wichtel 1",
-		  "Email": "testwichtel1@test.de"
-		}]`);
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	err := json.Unmarshal(jsonInput, wichtelGroup)
+	fmt.Printf("File contents: %s", content)
 
-	if (err != nil) {
-		fmt.Println("Wichtel unmarshal failed.", err)
+	jsonErr := json.Unmarshal(content, wichtelGroup)
+
+	if jsonErr != nil {
+		log.Fatal("Wichtel unmarshal failed: ", jsonErr)
 	}
 }

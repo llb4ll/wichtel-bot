@@ -24,9 +24,9 @@ func TestWichtelJson(t *testing.T) {
 
 	var wichtelGroup WichtelGroup
 
-	wichtelGroup.readWichtelInput()
+	wichtelGroup.readWichtelInput("wichtel.json")
 
-	if (len(wichtelGroup) != 1) {
-		t.Error("Expected 1 wichtel, got ", wichtelGroup)
+	if (len(wichtelGroup) != 3) {
+		t.Error("Expected 3 wichtel, got ", wichtelGroup)
 	}
 }
