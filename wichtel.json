@@ -1,19 +1,19 @@
-[
-  {
-	"Name": "Test Wichtel 1",
-	"Email": "testwichtel1@test.de"
-	"ExcludeWichtel": [
-	  {
-		"Email": "testwichtel2@test.de"
-	  }
-	]
-  },
-  {
-	"Name": "Test Wichtel 2",
-	"Email": "testwichtel2@test.de"
-  },
-  {
-	"Name": "Test Wichtel 3",
-	"Email": "testwichtel3@test.de"
-  }
-]
+{
+  "Wichtel": [
+	{
+	  "Name": "Test Wichtel 1",
+	  "Email": "testwichtel1@test.de"
+	  "ExcludeWichtelByEmail": [
+		"testwichtel2@test.de"
+	  ]
+	},
+	{
+	  "Name": "Test Wichtel 2",
+	  "Email": "testwichtel2@test.de"
+	},
+	{
+	  "Name": "Test Wichtel 3",
+	  "Email": "testwichtel3@test.de"
+	}
+  ]
+}
