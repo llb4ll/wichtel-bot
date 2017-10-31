@@ -1,7 +1,7 @@
 # wichtel-bot
 A small wichtel bot to send out secret santa emails.
 
-https://travis-ci.org/llb4ll/wichtel-bot.svg?branch=master
+[![Build Status](https://travis-ci.org/llb4ll/wichtel-bot.svg?branch=master)](https://travis-ci.org/llb4ll/wichtel-bot)
 
 ## Features
 - Add email addresses and the wichtel bot will randomly draw secret santas and send them emails containing the name and email of their wichtel
