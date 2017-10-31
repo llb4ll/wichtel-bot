@@ -26,8 +26,8 @@ func TestWichtelJson(t *testing.T) {
 
 	wichtelGroup.readWichtelInput("wichtel.json")
 
-	if (len(wichtelGroup) != 3) {
-		t.Error("Expected 3 wichtel, got ", wichtelGroup)
+	if (len(wichtelGroup) != 4) {
+		t.Error("Expected 4 wichtel, got ", wichtelGroup)
 	}
 }
 
@@ -38,16 +38,16 @@ func TestWichtelAssignment(t *testing.T) {
 	wichtelGroup := WichtelGroup{wichtel1, wichtel2}
 
 	wichtelMap := make(WichtelMap)
-	var success = wichtelMap.assignWichtel(wichtelGroup)
+	err, wichtelMap := wichtelGroup.assignWichtel()
 
-	if success {
+	if err == nil {
 		if (len(wichtelGroup) != len(wichtelMap)) {
 			t.Error("Assignment of wichtel failed - not everybody got a wichtel: ", wichtelGroup, wichtelMap)
 		}
 
-		for wichtelPointer, wichtel := range wichtelMap {
-			if ((*wichtelPointer).Email == wichtel.Email) {
-				t.Error("Assignment failed - secret santa was assigned himself as a wichtel: ", (*wichtelPointer).Name)
+		for santa, wichtel := range wichtelMap {
+			if ((*santa).Email == wichtel.Email) {
+				t.Error("Assignment failed - secret santa was assigned himself as a wichtel: ", (*santa).Name)
 			}
 		}
 	}

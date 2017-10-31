@@ -7,6 +7,7 @@ import (
 	"log"
 	"math/rand"
 	"time"
+	"errors"
 )
 
 // A wichtel for the wichtel draw - wichtel are identified by their email
@@ -20,20 +21,29 @@ type WichtelGroup []Wichtel
 
 type WichtelMap map[*Wichtel]Wichtel
 
+const MAXIMUM_DRAW_RUNS = 100
 
 // Main function running the wichtel draw
 func main() {
 	fmt.Println("Hello wichtel admin!")
 
-	var wichtelGroup WichtelGroup;
+	var wichtelGroup WichtelGroup
 
 	wichtelGroup.readWichtelInput("wichtel.json")
 
 	fmt.Println("You are about to draw wichtel from: ", wichtelGroup)
 
-	var wichtelMap WichtelMap;
-
-	wichtelMap.assignWichtel(wichtelGroup)
+	var runs = 1
+	for ; runs < MAXIMUM_DRAW_RUNS; {
+		err, wichtelMap := wichtelGroup.assignWichtel()
+		if err == nil {
+			fmt.Println("Wichtel successfully assigned: ")
+			for santa, wichtel := range wichtelMap{
+				fmt.Println((*santa).Email, wichtel.Email)
+			}
+			return
+		}
+	}
 
 }
 
@@ -65,9 +75,11 @@ func (wichtelGroup *WichtelGroup) readWichtelInput(filePath string) {
 	}
 }
 
-func (wichtelMap *WichtelMap) assignWichtel(wichtelGroup WichtelGroup) (bool) {
+func (inputGroup WichtelGroup) assignWichtel() (err error, wichtelMap WichtelMap) {
 
-	var santaGroup = append([]Wichtel(nil), wichtelGroup...)
+	wichtelMap = make(WichtelMap)
+	var santaGroup = append([]Wichtel(nil), inputGroup...)
+	var wichtelGroup WichtelGroup = append([]Wichtel(nil), inputGroup...)
 
 	for len(wichtelGroup) > 0 {
 		var wichtel Wichtel;
@@ -76,13 +88,14 @@ func (wichtelMap *WichtelMap) assignWichtel(wichtelGroup WichtelGroup) (bool) {
 		wichtel, wichtelGroup = wichtelGroup.drawRandomWichtel()
 		santa, santaGroup = santaGroup[0], santaGroup[1:]
 		if !santa.checkWichtel(wichtel) {
-			return false
+			err = errors.New("Draw did not succeed")
+			return
 		}
 
-		(*wichtelMap)[&santa] = wichtel
+		wichtelMap[&santa] = wichtel
 	}
 
-	return true
+	return
 }
 
 func (santa Wichtel) checkWichtel(wichtel Wichtel) (bool) {
