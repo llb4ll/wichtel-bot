@@ -38,15 +38,35 @@ func TestWichtelAssignment(t *testing.T) {
 	wichtelGroup := WichtelGroup{wichtel1, wichtel2}
 
 	wichtelMap := make(WichtelMap)
-	wichtelMap.assignWichtel(wichtelGroup)
+	var success = wichtelMap.assignWichtel(wichtelGroup)
 
-	if(len(wichtelGroup) != len(wichtelMap)){
-		t.Error("Assignment of wichtel failed - not everybody got a wichtel: ", wichtelGroup, wichtelMap)
+	if success {
+		if (len(wichtelGroup) != len(wichtelMap)) {
+			t.Error("Assignment of wichtel failed - not everybody got a wichtel: ", wichtelGroup, wichtelMap)
+		}
+
+		for wichtelPointer, wichtel := range wichtelMap {
+			if ((*wichtelPointer).Email == wichtel.Email) {
+				t.Error("Assignment failed - secret santa was assigned himself as a wichtel: ", (*wichtelPointer).Name)
+			}
+		}
+	}
+}
+
+func TestCheckWichtel(t *testing.T) {
+	santa := Wichtel{"Test Santa", "testsantamail", nil}
+	santaWithRestrictions := Wichtel{"Test Santa", "testsantamail", []string{"testwichtelmail"}}
+	wichtel := Wichtel{"Test Wichtel", "testwichtelmail", nil}
+
+	if (santa.checkWichtel(santa) != false) {
+		t.Error("Check wichtel failed. Expected santa not being a valid wichtel for himself")
 	}
 
-	for wichtelPointer, wichtel := range wichtelMap{
-		if((*wichtelPointer).Email == wichtel.Email){
-			t.Error("Assignment failed - secret santa was assigned himself as a wichtel: ", (*wichtelPointer).Name)
-		}
+	if (santaWithRestrictions.checkWichtel(wichtel) != false) {
+		t.Error("Check wichtel failed. Expected santa not being a valid santa for wichtel in his restricitons list.")
+	}
+
+	if (santa.checkWichtel(wichtel) != true) {
+		t.Error("Check wichtel failed. Expected santa to be a match for other wichtel")
 	}
 }

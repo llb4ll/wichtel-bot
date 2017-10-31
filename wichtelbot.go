@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"math/rand"
+	"time"
 )
 
 // A wichtel for the wichtel draw - wichtel are identified by their email
@@ -36,8 +38,12 @@ func main() {
 }
 
 // Draw a random wichtel from the wichtel pool
-func (wichtel Wichtel) drawRandomWichtel(wichtelIn WichtelGroup) {
-
+func (wichtelGroup WichtelGroup) drawRandomWichtel() (wichtel Wichtel, remainingWichtelGroup WichtelGroup) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	var randomIndex = r.Intn(len(wichtelGroup))
+	wichtel = wichtelGroup[randomIndex]
+	remainingWichtelGroup = append(wichtelGroup[:randomIndex], wichtelGroup[randomIndex + 1:]...)
+	return
 }
 
 // Send out wichtel emails
@@ -59,8 +65,36 @@ func (wichtelGroup *WichtelGroup) readWichtelInput(filePath string) {
 	}
 }
 
-func (wichtelMap *WichtelMap) assignWichtel(wichtelGroup WichtelGroup) {
-	for index, wichtel := range wichtelGroup {
-		(*wichtelMap)[&(wichtelGroup[index])] = wichtel
+func (wichtelMap *WichtelMap) assignWichtel(wichtelGroup WichtelGroup) (bool) {
+
+	var santaGroup = append([]Wichtel(nil), wichtelGroup...)
+
+	for len(wichtelGroup) > 0 {
+		var wichtel Wichtel;
+		var santa Wichtel;
+
+		wichtel, wichtelGroup = wichtelGroup.drawRandomWichtel()
+		santa, santaGroup = santaGroup[0], santaGroup[1:]
+		if !santa.checkWichtel(wichtel) {
+			return false
+		}
+
+		(*wichtelMap)[&santa] = wichtel
 	}
+
+	return true
+}
+
+func (santa Wichtel) checkWichtel(wichtel Wichtel) (bool) {
+	if (santa.Email == wichtel.Email) {
+		return false
+	}
+
+	for _, mail := range santa.ExcludeWichtelByEmail {
+		if mail == wichtel.Email {
+			return false
+		}
+	}
+
+	return true
 }

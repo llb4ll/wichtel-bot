@@ -28,3 +28,5 @@ To run the wichtel bot:
 The first implementation will be a greedy shuffle that is performed for each secret santa. 
 In case a secret santa is left without a matching wichtel the draw is repeated.
 The maximum amount of tries is set to 10.
+Of course this implementation has the disadvantage of not beeing deterministic.
+An improvement idea would be to use https://en.wikipedia.org/wiki/Blossom_algorithm.
