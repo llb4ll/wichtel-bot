@@ -43,4 +43,10 @@ func TestWichtelAssignment(t *testing.T) {
 	if(len(wichtelGroup) != len(wichtelMap)){
 		t.Error("Assignment of wichtel failed - not everybody got a wichtel: ", wichtelGroup, wichtelMap)
 	}
+
+	for wichtelPointer, wichtel := range wichtelMap{
+		if((*wichtelPointer).Email == wichtel.Email){
+			t.Error("Assignment failed - secret santa was assigned himself as a wichtel: ", (*wichtelPointer).Name)
+		}
+	}
 }
