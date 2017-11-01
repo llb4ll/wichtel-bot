@@ -1,0 +1,8 @@
+{
+  "SmtpServer": "mail.example.com",
+  "SmtpPort": "25",
+  "SmtpUser": "test",
+  "SmtpPassword": "test",
+  "SenderEmail": "test@example.com",
+  "MaximumDrawRuns": 100
+}

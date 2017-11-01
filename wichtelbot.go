@@ -8,7 +8,18 @@ import (
 	"math/rand"
 	"time"
 	"errors"
+	"net/smtp"
 )
+
+// wichtel-bot settings
+type Settings struct {
+	SmtpServer      string
+	SmtpPort        string
+	SmtpUser        string
+	SmtpPassword    string
+	SenderEmail     string
+	MaximumDrawRuns int
+}
 
 // A wichtel for the wichtel draw - wichtel are identified by their email
 type Wichtel struct {
@@ -27,6 +38,10 @@ const MAXIMUM_DRAW_RUNS = 100
 func main() {
 	fmt.Println("Hello wichtel admin!")
 
+	var settings Settings
+
+	settings.readSettings("settings.json")
+
 	var wichtelGroup WichtelGroup
 
 	wichtelGroup.readWichtelInput("wichtel.json")
@@ -38,8 +53,9 @@ func main() {
 		err, wichtelMap := wichtelGroup.assignWichtel()
 		if err == nil {
 			fmt.Println("Wichtel successfully assigned: ")
-			for santa, wichtel := range wichtelMap{
+			for santa, wichtel := range wichtelMap {
 				fmt.Println((*santa).Email, wichtel.Email)
+				sendEmail(settings, wichtel, santa)
 			}
 			return
 		}
@@ -57,8 +73,48 @@ func (wichtelGroup WichtelGroup) drawRandomWichtel() (wichtel Wichtel, remaining
 }
 
 // Send out wichtel emails
-func (wichtel Wichtel) sendEmail() {
-	// send out wichtel mail
+func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
+	// Set up authentication information.
+	auth := smtp.PlainAuth("", settings.SmtpUser, settings.SmtpPassword, settings.SmtpServer + ":" + settings.SmtpPort)
+
+	// Connect to the server, authenticate, set the sender and recipient,
+	// and send the email all in one step.
+	to := []string{santa.Email}
+	msg := []byte("Dein Wichtel ist: " + wichtel.Email + "\r\n" +
+		"Happy Wichteling!\r\n" +
+		"\r\n" +
+		"¨¨¨¨¨¨¨¨¨. *\r\n" +
+		"¨¨¨¨¨¨¨¨¨ **\r\n" +
+		"¨¨¨¨¨¨¨¨¨*o*\r\n" +
+		"¨¨¨¨¨¨¨¨*♥*o*\r\n" +
+		"¨¨¨¨¨¨¨***o***\r\n" +
+		"¨¨¨¨¨¨**o**♥*o*\r\n" +
+		"¨¨¨¨¨**♥**o**o**\r\n" +
+		"¨¨¨¨**o**♥***♥*o*\r\n" +
+		"¨¨¨*****♥*o**o****\r\n" +
+		"¨¨**♥**o*****o**♥**\r\n" +
+		"¨******o*****♥**o***\r\n" +
+		"	****o***♥**o***o***♥ *\r\n" +
+		"¨¨¨¨¨____!_!____\r\n" +
+		"¨¨¨¨¨\\_________/¨¨\r\n")
+	err := smtp.SendMail(settings.SmtpServer + ":" + settings.SmtpPort, auth, settings.SenderEmail, to, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (settings *Settings) readSettings(filePath string) {
+
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	jsonErr := json.Unmarshal(content, settings)
+
+	if jsonErr != nil {
+		log.Fatal("Settings unmarshal failed: ", jsonErr)
+	}
 }
 
 func (wichtelGroup *WichtelGroup) readWichtelInput(filePath string) {

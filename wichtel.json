@@ -8,7 +8,10 @@
   },
   {
 	"Name": "Test Wichtel 2",
-	"Email": "testwichtel2@test.de"
+	"Email": "testwichtel2@test.de",
+	"ExcludeWichtelByEmail": [
+	  "testwichtel1@test.de"
+	]
   },
   {
 	"Name": "Test Wichtel 3",
