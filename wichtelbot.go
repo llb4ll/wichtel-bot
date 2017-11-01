@@ -55,7 +55,7 @@ func main() {
 			fmt.Println("Wichtel successfully assigned: ")
 			for santa, wichtel := range wichtelMap {
 				fmt.Println((*santa).Email, wichtel.Email)
-				sendEmail(settings, wichtel, santa)
+				sendEmail(settings, wichtel, *santa)
 			}
 			return
 		}
