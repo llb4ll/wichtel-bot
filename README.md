@@ -3,13 +3,12 @@ A small wichtel bot to send out secret santa emails.
 
 [![Build Status](https://travis-ci.org/llb4ll/wichtel-bot.svg?branch=master)](https://travis-ci.org/llb4ll/wichtel-bot)
 
-## Features (to be implemented)
-- Add email addresses and the wichtel bot will randomly draw secret santas and send them emails containing the name and email of their wichtel
-- You can dry-run and run the wichtel bot using Docker
-- Configure smtp settings in a config file
-- Provide secret santa email addresses using a config file
+## Features
+- Add email addresses and the wichtel bot will randomly draw secret santas and send them emails containing the name and email of their wichtel.
+- You can dry-run and run the wichtel bot using Docker if you don't change the `settings.json`.
+- Configure smtp settings in a config file `settings.json`.
+- Provide secret santa email addresses using a config file `wichtel.json`.
 - Define exclusions for each secret santa (this person will not be in the draw). Perfect to prevent couples from gifting each other.
-- Chirstmas style the email you sent out
 
 ## Technologies
 - Golang: https://golang.org/
@@ -18,11 +17,15 @@ A small wichtel bot to send out secret santa emails.
 ## Build & Run
 The easiest way to get started is to use Docker to build and run the project:
 
-To build the project with docker:
-`docker build -t "wichtel-bot" .`
+1. Change `settings.json` and add your smtp server settings.
 
-To run the wichtel bot:
-`docker run wichtel:latest`
+2. Add participating wichtel/santas to `wichtel.json`.
+
+3. Build the project with docker:
+	`docker build -t "wichtel-bot" .`
+
+4. To run the wichtel bot:
+	`docker run wichtel:latest`
 
 ## Algorithm
 The first implementation will be a greedy shuffle that is performed for each secret santa. 
