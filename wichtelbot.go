@@ -74,6 +74,12 @@ func (wichtelGroup WichtelGroup) drawRandomWichtel() (wichtel Wichtel, remaining
 
 // Send out wichtel emails
 func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
+
+	if(settings.SmtpServer == "mail.example.com"){
+		fmt.Println("Please provide smtp settings to send out wichtel mails.")
+		return
+	}
+
 	// Set up authentication information.
 	auth := smtp.PlainAuth("", settings.SmtpUser, settings.SmtpPassword, settings.SmtpServer + ":" + settings.SmtpPort)
 
@@ -100,6 +106,8 @@ func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
 	err := smtp.SendMail(settings.SmtpServer + ":" + settings.SmtpPort, auth, settings.SenderEmail, to, msg)
 	if err != nil {
 		log.Fatal(err)
+	}else {
+		fmt.Println("Mail sent successfully.")
 	}
 }
 
