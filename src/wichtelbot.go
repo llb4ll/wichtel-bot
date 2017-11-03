@@ -9,6 +9,7 @@ import (
 	"time"
 	"errors"
 	"net/smtp"
+	"net"
 )
 
 // wichtel-bot settings
@@ -79,14 +80,19 @@ func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
 		fmt.Println("Please provide smtp settings to send out wichtel mails.")
 		return
 	}
+	host, _, _ := net.SplitHostPort(settings.SmtpServer + ":" + settings.SmtpPort)
 
 	// Set up authentication information.
-	auth := smtp.PlainAuth("", settings.SmtpUser, settings.SmtpPassword, settings.SmtpServer + ":" + settings.SmtpPort)
+	auth := smtp.PlainAuth("", settings.SmtpUser, settings.SmtpPassword, host)
 
 	// Connect to the server, authenticate, set the sender and recipient,
 	// and send the email all in one step.
 	to := []string{santa.Email}
-	msg := []byte("Dein Wichtel ist: " + wichtel.Email + "\r\n" +
+	from := "From: " + settings.SenderEmail + "\n"
+	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n\n";
+	subject := "Subject: Dein Wichtel!\n"
+
+	msg := []byte(from + subject + mime + "Dein Wichtel ist: " + wichtel.Email + "\r\n" +
 		"Happy Wichteling!\r\n" +
 		"\r\n" +
 		"¨¨¨¨¨¨¨¨¨. *\r\n" +
