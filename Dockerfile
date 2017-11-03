@@ -1,6 +1,6 @@
 FROM golang:1.9
 
-WORKDIR /go/src/wichtel
+WORKDIR /go/src/wichtel-bot
 COPY src .
 COPY config config
 

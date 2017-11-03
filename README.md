@@ -15,17 +15,24 @@ A small wichtel bot to send out secret santa emails.
 - Docker: https://www.docker.com/
 
 ## Build & Run
+You can either run the go program directly or use docker.
+
+### Using Docker
 The easiest way to get started is to use Docker to build and run the project:
 
-1. Change `config/settings.json` and add your smtp server settings.
+0. Build the project with docker: `docker build -t "wichtel-bot" .`
 
-2. Add participating wichtel/santas to `config/wichtel.json`.
+1. Copy the folder `config`. Let's name the copied folder `my-config`.
+ 
+2. Adapt `my-config/settings.json` to add your smtp server settings.
 
-3. Build the project with docker:
-	`docker build -t "wichtel-bot" .`
+2. Add participating wichtel/santas to `my-config/wichtel.json`.
 
 4. To run the wichtel bot:
-	`docker run wichtel:latest`
+	`docker run -v <ABSOLUTE-PATH-TO-MY-CONFIG>:/go/src/wichtel-bot/config wichtel-bot:latest`
+	
+### Using Go
+Run the wichtelbot with `go run src/wichtelbot.go` - In this case you will need to edit the config files directly.
 
 ## Algorithm
 The first implementation will be a greedy shuffle that is performed for each secret santa. 
