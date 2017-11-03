@@ -17,9 +17,9 @@ A small wichtel bot to send out secret santa emails.
 ## Build & Run
 The easiest way to get started is to use Docker to build and run the project:
 
-1. Change `settings.json` and add your smtp server settings.
+1. Change `config/settings.json` and add your smtp server settings.
 
-2. Add participating wichtel/santas to `wichtel.json`.
+2. Add participating wichtel/santas to `config/wichtel.json`.
 
 3. Build the project with docker:
 	`docker build -t "wichtel-bot" .`

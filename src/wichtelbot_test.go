@@ -24,7 +24,7 @@ func TestWichtelJson(t *testing.T) {
 
 	var wichtelGroup WichtelGroup
 
-	wichtelGroup.readWichtelInput("wichtel.json")
+	wichtelGroup.readWichtelInput("config/wichtel.json")
 
 	if (len(wichtelGroup) != 4) {
 		t.Error("Expected 4 wichtel, got ", wichtelGroup)

@@ -40,11 +40,11 @@ func main() {
 
 	var settings Settings
 
-	settings.readSettings("settings.json")
+	settings.readSettings("config/settings.json")
 
 	var wichtelGroup WichtelGroup
 
-	wichtelGroup.readWichtelInput("wichtel.json")
+	wichtelGroup.readWichtelInput("config/wichtel.json")
 
 	fmt.Println("You are about to draw wichtel from: ", wichtelGroup)
 

@@ -1,7 +1,8 @@
 FROM golang:1.9
 
 WORKDIR /go/src/wichtel
-COPY . .
+COPY src .
+COPY config config
 
 RUN go-wrapper download
 RUN go-wrapper install
