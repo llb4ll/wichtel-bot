@@ -107,7 +107,7 @@ func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
 		"¨¨¨*****♥*o**o****\r\n" +
 		"¨¨**♥**o*****o**♥**\r\n" +
 		"¨******o*****♥**o***\r\n" +
-		"	****o***♥**o***o***♥ *\r\n" +
+		"****o***♥**o***o***♥ *\r\n" +
 		"¨¨¨¨¨____!_!____\r\n" +
 		"¨¨¨¨¨\\_________/¨¨\r\n")
 	err := smtp.SendMail(settings.SmtpServer + ":" + settings.SmtpPort, auth, settings.SenderEmail, to, msg)
