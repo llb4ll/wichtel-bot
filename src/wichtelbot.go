@@ -10,6 +10,7 @@ import (
 	"errors"
 	"net/smtp"
 	"net"
+	"strings"
 )
 
 // wichtel-bot settings
@@ -19,6 +20,7 @@ type Settings struct {
 	SmtpUser        string
 	SmtpPassword    string
 	SenderEmail     string
+	MailText        []string
 	MaximumDrawRuns int
 }
 
@@ -76,7 +78,7 @@ func (wichtelGroup WichtelGroup) drawRandomWichtel() (wichtel Wichtel, remaining
 // Send out wichtel emails
 func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
 
-	if(settings.SmtpServer == "mail.example.com"){
+	if (settings.SmtpServer == "mail.example.com") {
 		fmt.Println("Please provide smtp settings to send out wichtel mails.")
 		return
 	}
@@ -93,27 +95,11 @@ func sendEmail(settings Settings, wichtel Wichtel, santa Wichtel) {
 	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n\n";
 	subject := "Subject: Dein Wichtel!\n"
 
-	msg := []byte(fromHeader + toHeader + subject + mime + "Dein Wichtel ist: " + wichtel.Name + " (" + wichtel.Email + ")\r\n" +
-		"Happy Wichteling!\r\n" +
-		"\r\n" +
-		"¨¨¨¨¨¨¨¨¨. *\r\n" +
-		"¨¨¨¨¨¨¨¨¨ **\r\n" +
-		"¨¨¨¨¨¨¨¨¨*o*\r\n" +
-		"¨¨¨¨¨¨¨¨*♥*o*\r\n" +
-		"¨¨¨¨¨¨¨***o***\r\n" +
-		"¨¨¨¨¨¨**o**♥*o*\r\n" +
-		"¨¨¨¨¨**♥**o**o**\r\n" +
-		"¨¨¨¨**o**♥***♥*o*\r\n" +
-		"¨¨¨*****♥*o**o****\r\n" +
-		"¨¨**♥**o*****o**♥**\r\n" +
-		"¨******o*****♥**o***\r\n" +
-		"****o***♥**o***o***♥ *\r\n" +
-		"¨¨¨¨¨____!_!____\r\n" +
-		"¨¨¨¨¨\\_________/¨¨\r\n")
+	msg := []byte(fromHeader + toHeader + subject + mime + fmt.Sprintf(strings.Join(settings.MailText, ""), wichtel.Name, wichtel.Email))
 	err := smtp.SendMail(settings.SmtpServer + ":" + settings.SmtpPort, auth, settings.SenderEmail, to, msg)
 	if err != nil {
 		log.Fatal(err)
-	}else {
+	} else {
 		fmt.Println("Mail sent successfully.")
 	}
 }

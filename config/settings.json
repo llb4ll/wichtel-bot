@@ -4,5 +4,24 @@
   "SmtpUser": "test",
   "SmtpPassword": "test",
   "SenderEmail": "test@example.com",
-  "MaximumDrawRuns": 100
+  "MaximumDrawRuns": 100,
+  "MailText": [
+	"Dein Wichtel ist: %s (Email: %s)\r\n",
+	"Happy Wichteling!\r\n",
+	"\r\n",
+	"¨¨¨¨¨¨¨¨¨¨*\r\n",
+	"¨¨¨¨¨¨¨¨¨¨**\r\n",
+	"¨¨¨¨¨¨¨¨¨*o*\r\n",
+	"¨¨¨¨¨¨¨¨*♥*o*\r\n",
+	"¨¨¨¨¨¨¨***o***\r\n",
+	"¨¨¨¨¨¨**o**♥*o*\r\n",
+	"¨¨¨¨¨**♥**o**o**\r\n",
+	"¨¨¨¨**o**♥***♥*o*\r\n",
+	"¨¨¨*****♥*o**o****\r\n",
+	"¨¨**♥**o*****o**♥**\r\n",
+	"¨******o*****♥**o***\r\n",
+	"****o***♥**o***o***♥ *\r\n",
+	"¨¨¨¨¨____!_!____\r\n",
+	"¨¨¨¨¨\\_________/¨¨\r\n"
+  ]
 }
