@@ -6,7 +6,7 @@
   "SenderEmail": "test@example.com",
   "MaximumDrawRuns": 100,
   "MailText": [
-	"Dein Wichtel ist: %s (Email: %s)\r\n",
+	"Your wichtel is: %s (email: %s)\r\n",
 	"Happy Wichteling!\r\n",
 	"\r\n",
 	"¨¨¨¨¨¨¨¨¨¨*\r\n",
