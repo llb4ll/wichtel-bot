@@ -40,3 +40,6 @@ In case a secret santa is left without a matching wichtel the draw is repeated.
 The maximum amount of tries is set to 100.
 Of course this implementation has the disadvantage of not beeing deterministic.
 An improvement idea would be to use an algorithm finding a perfect matching in a bipartite graph.
+
+Links:
+- https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem
