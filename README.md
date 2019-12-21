@@ -39,7 +39,10 @@ The first implementation will be a greedy shuffle that is performed for each sec
 In case a secret santa is left without a matching wichtel the draw is repeated.
 The maximum amount of tries is set to 100.
 Of course this implementation has the disadvantage of not beeing deterministic.
-An improvement idea would be to use an algorithm finding a perfect matching in a bipartite graph.
+
+An improvement idea would be to use an algorithm finding a perfect matching in a bipartite graph:
+
+Consider two groups, the group of santas S and the group of wichtel W. For our problem at hand, each person is represented once in each group. There are now edges E between elements of both groups if a santa is valid for a wichtel. Together this is the bipartite graph (S, W, E).
 
 Links:
 - https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem
