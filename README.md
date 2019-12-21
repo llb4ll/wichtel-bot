@@ -1,5 +1,13 @@
 # wichtel-bot
-A small wichtel bot to send out secret santa emails.
+A small "wichtel" bot to send out secret santa emails.
+
+In the following santa gets a gift for a "wichtel", although the other way around is true as well. But for the sake of variable naming we'll go with the following:
+The person getting a gift for someone is called "secret santa" or simply "santa".
+The person to receive a gift is called "wichtel". A "wichtel" is a small fantasy creature doing good. 
+
+Read more about "Wichteln" (DE) or Secret Santa (GB, US):
+- https://de.wikipedia.org/wiki/Wichteln
+- https://en.wikipedia.org/wiki/Secret_Santa
 
 [![Build Status](https://travis-ci.org/llb4ll/wichtel-bot.svg?branch=master)](https://travis-ci.org/llb4ll/wichtel-bot)
 
