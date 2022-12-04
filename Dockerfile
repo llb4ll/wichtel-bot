@@ -1,11 +1,11 @@
-FROM golang:1.11
+FROM golang:1.19
 
 WORKDIR /go/src/wichtel-bot
 COPY src .
 COPY config config
 
-RUN go get -d -v .
-RUN go test -v .
+RUN go env -w GO111MODULE=auto # only use module when go.mod files is found
 RUN go install -v .
+RUN go test -v .
 
 CMD ["wichtel-bot"]
