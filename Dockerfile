@@ -1,4 +1,4 @@
-FROM golang:1.19
+FROM golang:1.21
 
 WORKDIR /go/src/wichtel-bot
 COPY src .
